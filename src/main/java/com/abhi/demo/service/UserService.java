@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,8 +17,13 @@ public class UserService {
 
     @Transactional
     public User saveUser(User user) {
-        UserValidator.isValidUserRequest(user);
-        return userRepo.save(user);
+        try {
+            UserValidator.isValidUserRequest(user);
+            user = userRepo.save(user);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return user;
     }
 
     @Transactional

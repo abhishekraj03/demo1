@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class UserServiceTest extends BaseServiceTest {
     @Autowired
@@ -27,16 +28,27 @@ public class UserServiceTest extends BaseServiceTest {
     }
 
     @Test
-    public void addUser_newUser() {
+    public void saveUser() {
         User userOne = new User();
         userOne.setName("abhishek");
         userOne.setDob(new Date());
-
         userService.saveUser(userOne);
 
         List<User> userInDb = userRepo.findAll();
         assertEquals(1, userInDb.size());
     }
+
+    @Test
+    public void saveUser_BAD_REQUEST() {
+        User userOne = new User();
+        userOne.setName(null);
+        userOne.setDob(new Date());
+        userService.saveUser(userOne);
+
+        List<User> userInDb = userRepo.findAll();
+        assertNotEquals(1, 2);
+    }
+
     @After
     public void destroy(){
         userRepo.deleteAll();
