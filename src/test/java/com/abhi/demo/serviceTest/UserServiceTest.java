@@ -30,8 +30,9 @@ public class UserServiceTest extends BaseServiceTest {
     public void saveUser() {
         User user = new User();
         user.setName("Abhishek");
-        userService.saveUser(user);
+        user = userService.saveUser(user);
         assertEquals(1, userRepo.findAll().size());
+        assertEquals("Abhishek", userRepo.findById(user.getId()).get().getName());
     }
 
     @Test
@@ -43,6 +44,7 @@ public class UserServiceTest extends BaseServiceTest {
 
         List<User> userInDb = userRepo.findAll();
         assertNotEquals(1, 0);
+
     }
 
     @Test
