@@ -44,7 +44,7 @@ public class UserControllerTest extends BaseControllerTest {
     }
 
     @Test
-    public void saveUserTest_badRequest() throws Exception {
+    public void saveUserTest_BAD_REQUEST() throws Exception {
         String saveUserRequest = gson.toJson(null);
         this.mockMvc.perform(post("/user").content(saveUserRequest).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
