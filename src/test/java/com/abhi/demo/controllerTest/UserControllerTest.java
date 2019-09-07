@@ -34,11 +34,13 @@ public class UserControllerTest extends BaseControllerTest {
     public void saveUserTest() throws Exception {
         User user = new User();
         user.setName("abhishek raj");
+        user.setDob("08/07/1992");
         String saveUserRequest = gson.toJson(user);
         this.mockMvc.perform(post("/user").content(saveUserRequest).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.name").value("abhishek raj"))
+                .andExpect(jsonPath("$.dob").value("08/07/1992"))
                 .andReturn();
 
     }
@@ -57,6 +59,7 @@ public class UserControllerTest extends BaseControllerTest {
     public void getAllUser() throws Exception {
         User userOne = new User();
         userOne.setName("abhishek");
+        userOne.setDob("08/07/1992");
 
         String saveUserRequest = gson.toJson(userOne);
         this.mockMvc.perform(post("/user").content(saveUserRequest).contentType(MediaType.APPLICATION_JSON))

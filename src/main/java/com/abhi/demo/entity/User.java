@@ -1,11 +1,9 @@
 package com.abhi.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Entity
 @Table(name = "user")
@@ -20,8 +18,7 @@ public class User {
     private String name;
 
     @Column(name = "dob")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-    private Date dob;
+    private String dob;
 
     public Long getId() {
         return id;
@@ -39,11 +36,11 @@ public class User {
         this.name = name;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 }
